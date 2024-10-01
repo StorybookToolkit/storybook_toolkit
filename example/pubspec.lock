@@ -2,11 +2,12 @@
 # See https://dart.dev/tools/pub/glossary#lockfile
 packages:
   adaptive_golden_test:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../../adaptive_golden_test"
-      relative: true
-    source: path
+      name: adaptive_golden_test
+      sha256: "98b50744448655595b02f704c71016080f57e3759876613b9d6a6e3cfc26df2a"
+      url: "https://pub.dev"
+    source: hosted
     version: "1.0.0+1"
   any_syntax_highlighter:
     dependency: transitive
@@ -420,16 +421,18 @@ packages:
   storybook_toolkit:
     dependency: "direct main"
     description:
-      path: ".."
-      relative: true
-    source: path
+      name: storybook_toolkit
+      sha256: "7f96af1d08eaf9e517b2ae3798347493fa44aeef5d5c0ae7710bfda60cc55569"
+      url: "https://pub.dev"
+    source: hosted
     version: "1.3.1"
   storybook_toolkit_tester:
     dependency: "direct dev"
     description:
-      path: "../../storybook_toolkit_tester"
-      relative: true
-    source: path
+      name: storybook_toolkit_tester
+      sha256: "4515bf3922c3e8e762dc85f320b8315414d457c09262498c34370bf38efcd02e"
+      url: "https://pub.dev"
+    source: hosted
     version: "1.2.0+1"
   stream_channel:
     dependency: transitive
@@ -472,11 +475,12 @@ packages:
     source: hosted
     version: "1.3.2"
   vader_popup:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../../vader_popup"
-      relative: true
-    source: path
+      name: vader_popup
+      sha256: c140b6efe4bbcc7d3a0e3482687f5c34a4ffc33f921e07ab33cf4201db09a996
+      url: "https://pub.dev"
+    source: hosted
     version: "0.1.2+1"
   vector_math:
     dependency: transitive

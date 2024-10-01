@@ -74,5 +74,5 @@ build/
 !**/ios/**/default.perspectivev3
 
 failures/
-pubspec_overrides.yaml
+**/pubspec_overrides.yaml
 
