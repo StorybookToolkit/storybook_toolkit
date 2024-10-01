@@ -1,6 +1,0 @@
-# melos_managed_dependency_overrides: device_frame_plus,vader_popup
-dependency_overrides:
-  device_frame_plus:
-    path: ../device_frame_plus
-  vader_popup:
-    path: ../vader_popup
