@@ -16,41 +16,6 @@ import 'package:storybook_toolkit/src/plugins/text_sizer.dart';
 import 'package:storybook_toolkit/src/plugins/theme/code_view_syntax_theme.dart';
 import 'package:storybook_toolkit/storybook_toolkit.dart';
 
-class _ThemeWrapperBuilder {
-  _ThemeWrapperBuilder();
-
-  static Widget themeBuilder(
-    BuildContext context,
-    Color? canvasColor,
-    Widget child,
-  ) =>
-      Theme(
-        data: ThemeData(
-          canvasColor: canvasColor,
-          splashFactory: NoSplash.splashFactory,
-          focusColor: Theme.of(context).focusColor.withAlpha(18),
-          expansionTileTheme: const ExpansionTileThemeData(
-            shape: RoundedRectangleBorder(),
-            collapsedShape: RoundedRectangleBorder(),
-          ),
-          listTileTheme: ListTileThemeData(
-            minLeadingWidth: 0,
-            minVerticalPadding: 4.0,
-            horizontalTitleGap: 5.0,
-            selectedColor: Theme.of(context).primaryColor,
-            selectedTileColor: Theme.of(context).focusColor.withAlpha(18),
-            visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-            titleTextStyle: Theme.of(context).textTheme.bodyMedium,
-            subtitleTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  height: 1.2,
-                  color: Colors.black54,
-                ),
-          ),
-        ),
-        child: child,
-      );
-}
-
 /// Use this wrapper to wrap each route aware story inside default
 /// [MaterialApp.router] widget.
 class RouteWrapperBuilder {
@@ -96,8 +61,12 @@ Widget defaultMediaQueryBuilder(BuildContext context, Widget? child) {
 Widget materialWrapper(BuildContext context, Widget? child) {
   final LocalizationData localization = context.watch<LocalizationNotifier>().value;
   return MaterialApp(
-    theme: ThemeData.light(),
-    darkTheme: ThemeData.dark(),
+    theme: ThemeData.light().copyWith(
+      scaffoldBackgroundColor: Colors.white,
+    ),
+    darkTheme: ThemeData.dark().copyWith(
+      scaffoldBackgroundColor: Colors.black,
+    ),
     debugShowCheckedModeBanner: false,
     supportedLocales: localization.supportedLocales.values,
     localizationsDelegates: localization.delegates,
@@ -302,10 +271,29 @@ class _StorybookState extends State<Storybook> {
       routeWrapperBuilder: widget.routeWrapperBuilder,
     );
 
-    return _ThemeWrapperBuilder.themeBuilder(
-      context,
-      widget.canvasColor,
-      MaterialApp(
+    return MaterialApp(
+        theme: ThemeData(
+          canvasColor: widget.canvasColor,
+          splashFactory: NoSplash.splashFactory,
+          focusColor: Theme.of(context).focusColor.withAlpha(18),
+          expansionTileTheme: const ExpansionTileThemeData(
+            shape: RoundedRectangleBorder(),
+            collapsedShape: RoundedRectangleBorder(),
+          ),
+          listTileTheme: ListTileThemeData(
+            minLeadingWidth: 0,
+            minVerticalPadding: 4.0,
+            horizontalTitleGap: 5.0,
+            selectedColor: Theme.of(context).primaryColor,
+            selectedTileColor: Theme.of(context).focusColor.withAlpha(18),
+            visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+            titleTextStyle: Theme.of(context).textTheme.bodyMedium,
+            subtitleTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  height: 1.2,
+                  color: Colors.black54,
+                ),
+          ),
+        ),
         debugShowCheckedModeBanner: false,
         home: PopScope(
           canPop: false,
@@ -407,7 +395,6 @@ class _StorybookState extends State<Storybook> {
                 ),
               ),
             ),
-          ),
         ),
       ),
     );
