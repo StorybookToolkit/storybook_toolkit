@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Storybook(
+        canvasColor: Colors.white,
         initialStory: 'Home',
         plugins: initializePlugins(
           enableCodeView: false,
