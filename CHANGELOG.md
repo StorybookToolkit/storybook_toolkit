@@ -2,8 +2,8 @@
 
 ## 1.3.2
 
-- **FIX**: fixed incorrect usage of theming, allowed changing storybook background color
-- **FIX**: applied proper format for markdown using markdownlint
+- **FIX**: fix incorrect usage of theming, allowed changing storybook background color
+- **FIX**: apply proper format for markdown using markdownlint
 
 ## 1.3.1
 
