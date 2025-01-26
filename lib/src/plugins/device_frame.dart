@@ -62,7 +62,7 @@ Widget _buildStoryWrapper(BuildContext context, Widget? child) {
 
   return Directionality(
     textDirection: TextDirection.ltr,
-    child: device == null || isPage || hasError
+    child: device == null || deviceFrame.visibility == DeviceFrameVisibility.none || isPage || hasError
         ? focusableChild
         : SizedBox(
             width: double.infinity,
@@ -75,7 +75,7 @@ Widget _buildStoryWrapper(BuildContext context, Widget? child) {
                         padding: const EdgeInsets.all(defaultPaddingValue),
                         child: DeviceFrame(
                           device: device,
-                          isFrameVisible: deviceFrame.isFrameVisible,
+                          isFrameVisible: deviceFrame.visibility != DeviceFrameVisibility.hidden,
                           orientation: deviceFrame.orientation,
                           screen: focusableChild,
                         ),
@@ -86,17 +86,21 @@ Widget _buildStoryWrapper(BuildContext context, Widget? child) {
   );
 }
 
-typedef DeviceFrameData = ({
-  bool isFrameVisible,
-  DeviceInfo? device,
-  Orientation orientation,
-});
+enum DeviceFrameVisibility { none, visible, hidden }
 
-const DeviceFrameData defaultDeviceFrameData = (
-  isFrameVisible: true,
-  device: null,
-  orientation: Orientation.portrait,
-);
+class DeviceFrameData {
+  const DeviceFrameData({
+    this.visibility = DeviceFrameVisibility.visible,
+    this.device,
+    this.orientation = Orientation.portrait,
+  });
+
+  final DeviceFrameVisibility visibility;
+  final DeviceInfo? device;
+  final Orientation orientation;
+}
+
+const DeviceFrameData defaultDeviceFrameData = DeviceFrameData();
 
 class DeviceFrameDataNotifier extends ValueNotifier<DeviceFrameData> {
   DeviceFrameDataNotifier(super._value);
@@ -113,8 +117,8 @@ Widget _buildWrapper(
   return layout == Layout.auto
       ? ChangeNotifierProvider(
           create: (BuildContext _) => DeviceFrameDataNotifier(
-            (
-              isFrameVisible: initial.isFrameVisible,
+            DeviceFrameData(
+              visibility: initial.visibility,
               device: effectiveLayout == EffectiveLayout.compact ? null : initial.device,
               orientation: initial.orientation,
             ),
@@ -148,9 +152,9 @@ Widget _buildPanel(BuildContext context, List<DeviceInfo>? deviceInfoList) {
         selected: currentDevice.device == device,
         onTap: () {
           update(
-            (
+            DeviceFrameData(
               device: device,
-              isFrameVisible: currentDevice.isFrameVisible,
+              visibility: currentDevice.visibility,
               orientation: currentDevice.orientation,
             ),
           );
@@ -198,10 +202,12 @@ Widget _buildPanel(BuildContext context, List<DeviceInfo>? deviceInfoList) {
           contentPadding: deviceFrameTilePadding,
           onTap: () {
             update(
-              (
+              DeviceFrameData(
                 orientation: currentDevice.orientation,
                 device: currentDevice.device,
-                isFrameVisible: !currentDevice.isFrameVisible,
+                visibility: currentDevice.visibility == DeviceFrameVisibility.visible
+                    ? DeviceFrameVisibility.hidden
+                    : DeviceFrameVisibility.visible,
               ),
             );
           },
@@ -212,7 +218,7 @@ Widget _buildPanel(BuildContext context, List<DeviceInfo>? deviceInfoList) {
               Padding(
                 padding: deviceFrameDescriptionPadding,
                 child: Text(
-                  currentDevice.isFrameVisible ? 'visible' : 'hidden',
+                  currentDevice.visibility.name,
                   style: listTileTheme.subtitleTextStyle,
                 ),
               ),
@@ -228,10 +234,10 @@ Widget _buildPanel(BuildContext context, List<DeviceInfo>? deviceInfoList) {
             final orientation =
                 currentDevice.orientation == Orientation.portrait ? Orientation.landscape : Orientation.portrait;
             update(
-              (
+              DeviceFrameData(
                 orientation: orientation,
                 device: currentDevice.device,
-                isFrameVisible: currentDevice.isFrameVisible,
+                visibility: currentDevice.visibility,
               ),
             );
           },
@@ -258,9 +264,9 @@ Widget _buildPanel(BuildContext context, List<DeviceInfo>? deviceInfoList) {
           horizontalTitleGap: deviceFrameHorizontalTitleGap,
           selected: currentDevice.device == null,
           onTap: () => update(
-            (
+            DeviceFrameData(
               device: null,
-              isFrameVisible: currentDevice.isFrameVisible,
+              visibility: currentDevice.visibility,
               orientation: currentDevice.orientation,
             ),
           ),

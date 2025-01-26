@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
         initialStory: 'Home',
         plugins: initializePlugins(
           enableCodeView: false,
-          initialDeviceFrameData: (
-            isFrameVisible: true,
+          initialDeviceFrameData: DeviceFrameData(
+            visibility: DeviceFrameVisibility.none,
             device: Devices.ios.iPhone12ProMax,
             orientation: Orientation.portrait
           ),
