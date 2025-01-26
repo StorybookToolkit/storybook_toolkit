@@ -38,3 +38,8 @@ const EdgeInsets inputKnobDescriptionPadding = EdgeInsets.only(top: 4.0);
 // Padding
 const EdgeInsets sliderPadding = EdgeInsets.symmetric(vertical: 2.0);
 const EdgeInsets inputTextPadding = EdgeInsets.only(top: 2.0);
+
+
+const sectionSeparator = '/';
+
+typedef PathContext = ({String rootPath, String path, String file});

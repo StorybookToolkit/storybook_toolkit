@@ -1,8 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:storybook_toolkit/src/common/constants.dart';
-import 'package:storybook_toolkit/src/knobs/knob_list_tile.dart';
+import 'package:storybook_toolkit/src/plugins/knobs/knobs_notifier.dart';
+import 'package:storybook_toolkit/src/components/knob_list_tile.dart';
 import 'package:storybook_toolkit/storybook_toolkit.dart';
 
 /// {@template select_knob}

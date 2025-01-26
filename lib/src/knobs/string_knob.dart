@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:storybook_toolkit/src/common/constants.dart';
-import 'package:storybook_toolkit/src/knobs/knob_list_tile.dart';
+import 'package:storybook_toolkit/src/plugins/knobs/knobs_notifier.dart';
+import 'package:storybook_toolkit/src/components/knob_list_tile.dart';
 import 'package:storybook_toolkit/src/knobs/knobs.dart';
-import 'package:storybook_toolkit/src/plugins/knobs.dart';
 
 /// {@template string_knob}
 /// A knob that allows the user to edit a string value.

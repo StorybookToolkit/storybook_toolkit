@@ -1,18 +1,18 @@
 import 'package:flutter/widgets.dart';
-import 'package:storybook_toolkit/src/plugins/code_view.dart';
-import 'package:storybook_toolkit/src/plugins/device_frame.dart';
-import 'package:storybook_toolkit/src/plugins/directionality.dart';
-import 'package:storybook_toolkit/src/plugins/inspector.dart';
+import 'package:storybook_toolkit/src/plugins/code_view/code_view.dart';
+import 'package:storybook_toolkit/src/plugins/device_frame/device_frame.dart';
+import 'package:storybook_toolkit/src/plugins/others/directionality.dart';
+import 'package:storybook_toolkit/src/plugins/others/inspector.dart';
 import 'package:storybook_toolkit/src/plugins/localization.dart';
-import 'package:storybook_toolkit/src/plugins/text_sizer.dart';
+import 'package:storybook_toolkit/src/plugins/others/text_sizer.dart';
 import 'package:storybook_toolkit/src/plugins/theme_mode.dart';
-import 'package:storybook_toolkit/src/plugins/time_dilation.dart';
+import 'package:storybook_toolkit/src/plugins/others/time_dilation.dart';
 
-export 'contents/contents.dart';
-export 'device_frame.dart';
-export 'knobs.dart';
+export 'contents.dart';
+export '../plugins/device_frame/device_frame.dart';
+export '../plugins/knobs/knobs.dart';
 export 'layout.dart';
-export 'theme_mode.dart';
+export '../plugins/theme_mode.dart';
 
 /// Use this method to initialize and customize built-in plugins.
 List<Plugin> initializePlugins({

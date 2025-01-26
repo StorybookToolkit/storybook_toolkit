@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:storybook_toolkit/storybook_toolkit.dart';
 import 'package:provider/provider.dart';
-import 'package:storybook_toolkit/src/plugins/plugin.dart';
+import 'package:storybook_toolkit/src/core/plugin.dart';
 import 'package:vader_popup/vader_popup.dart';
 
 class LocalizationPlugin extends Plugin {

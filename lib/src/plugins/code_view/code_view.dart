@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:storybook_toolkit/src/plugins/plugin.dart';
+import 'package:storybook_toolkit/src/core/plugin.dart';
 
 class CodeViewPlugin extends Plugin {
   CodeViewPlugin({

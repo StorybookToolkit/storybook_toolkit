@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:storybook_toolkit/src/common/constants.dart';
-import 'package:storybook_toolkit/src/story.dart';
+import 'package:storybook_toolkit/src/story/story_notifier.dart';
 
 class SearchTextField extends StatefulWidget {
   const SearchTextField({super.key});

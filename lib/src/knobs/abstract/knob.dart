@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:storybook_toolkit/src/knobs/knob_value.dart';
+import 'package:storybook_toolkit/src/knobs/abstract/knob_value.dart';
 
 /// {@template knob}
 /// An class that represents a control knob.
