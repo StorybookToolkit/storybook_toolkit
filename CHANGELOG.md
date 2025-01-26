@@ -1,5 +1,12 @@
 # History
 
+## Latest
+- **CHORE**: upgrade dependencies
+- **CHORE**: update example goldens
+- **REFACTOR**: change DeviceFrameData to class
+- **FEAT**: Improve setup device frame visibility
+- **REFACTOR**: make huge refactor for better code reading 
+
 ## 1.3.2
 
 - **FIX**: fix incorrect usage of theming, allowed changing storybook background color
