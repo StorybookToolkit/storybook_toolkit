@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:storybook_toolkit/src/plugins/knobs/knobs_notifier.dart';
 import 'package:storybook_toolkit/src/plugins/code_view/code_view.dart';
 import 'package:storybook_toolkit/storybook_toolkit.dart';
 

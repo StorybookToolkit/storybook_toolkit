@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:storybook_toolkit/src/story/story.dart';
 import 'package:storybook_toolkit/storybook_toolkit.dart';
 
 void main() {
