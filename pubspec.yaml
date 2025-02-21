@@ -2,7 +2,7 @@ name: storybook_toolkit
 description: A storybook for Flutter widgets. Live preview of isolated widgets for faster development and showcase.
 issue_tracker: https://github.com/StorybookToolkit/storybook_toolkit/issues
 repository: https://github.com/StorybookToolkit/storybook_toolkit
-version: 1.3.2
+version: 2.0.0-dev.0
 
 topics:
   - storybook

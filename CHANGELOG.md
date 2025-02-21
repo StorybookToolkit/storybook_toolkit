@@ -1,6 +1,6 @@
 # History
 
-## Latest
+## 2.0.0-dev.0
 - **CHORE**: upgrade dependencies
 - **CHORE**: update example goldens
 - **REFACTOR**: change DeviceFrameData to class
