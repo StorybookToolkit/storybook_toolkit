@@ -1,4 +1,6 @@
 # History
+## 2.0.0-dev.1
+- **CHORE**: update dependencies
 
 ## 2.0.0-dev.0
 - **CHORE**: upgrade dependencies
