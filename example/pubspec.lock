@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: adaptive_golden_test
-      sha256: afafe29d2cbea971485368dbd4c634a6b8edf9c74117cde2230295710ed0bc00
+      sha256: "6c2c80eda0f6e8d2f897376a0f708aa0409215fdaf468b74bdc039c62da7e038"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.1"
+    version: "1.2.0"
   any_syntax_highlighter:
     dependency: transitive
     description:
@@ -77,10 +77,10 @@ packages:
     dependency: transitive
     description:
       name: device_frame_plus
-      sha256: "6b68d43a30a08465f86f33592ac60efcd1499979ef1310fbe3445d94f367297b"
+      sha256: "064e86f71f2721e66e4282c98d475cf9cd1e55d51eca6100183b7f6f2d237463"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.2+1"
+    version: "1.3.0"
   fading_edge_scrollview:
     dependency: transitive
     description:
@@ -137,10 +137,10 @@ packages:
     dependency: transitive
     description:
       name: freezed_annotation
-      sha256: c2e2d632dd9b8a2b7751117abcfc2b4888ecfe181bd9fca7170d9ef02e595fe2
+      sha256: c87ff004c8aa6af2d531668b46a4ea379f7191dc6dfa066acd53d506da6e044b
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.4"
+    version: "3.0.0"
   go_router:
     dependency: transitive
     description:
@@ -432,14 +432,14 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "2.0.0-dev.0"
+    version: "2.0.0-dev.1"
   storybook_toolkit_tester:
     dependency: "direct dev"
     description:
       path: "../../storybook_toolkit_tester"
       relative: true
     source: path
-    version: "1.4.0-dev.0"
+    version: "1.4.0-dev.1"
   stream_channel:
     dependency: transitive
     description:
@@ -484,10 +484,10 @@ packages:
     dependency: transitive
     description:
       name: vader_popup
-      sha256: c140b6efe4bbcc7d3a0e3482687f5c34a4ffc33f921e07ab33cf4201db09a996
+      sha256: abeec1e7e48ad4ead12764ca412b9b8877cf0e9725a2039f1170718d645fb5a4
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.2+1"
+    version: "0.2.0"
   vector_math:
     dependency: transitive
     description:
