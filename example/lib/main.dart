@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:storybook_toolkit/storybook_toolkit.dart';
 import 'package:storybook_toolkit_example/common/logo_widget.dart';
+import 'package:storybook_toolkit_example/l10n/app_localizations.dart';
 import 'package:storybook_toolkit_example/routing/route_aware_stories.dart';
 import 'package:storybook_toolkit_example/stories/counter_page.dart';
 import 'package:storybook_toolkit_example/stories/scaffold_page.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   usePathUrlStrategy();

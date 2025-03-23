@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:storybook_toolkit/storybook_toolkit.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:storybook_toolkit_example/l10n/app_localizations.dart';
 
 class ScaffoldPage extends StatelessWidget {
   const ScaffoldPage({super.key});

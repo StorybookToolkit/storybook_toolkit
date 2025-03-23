@@ -76,3 +76,4 @@ build/
 failures/
 **/pubspec_overrides.yaml
 
+**/l10n/**
