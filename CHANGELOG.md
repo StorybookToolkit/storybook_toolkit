@@ -1,4 +1,8 @@
 # History
+## 2.0.0-dev.2
+- **FIX**: add StorybookPlugins instead of List<Plugin> in Storybook main class (#5)
+- **FIX**: fix localizations in example
+
 ## 2.0.0-dev.1
 - **CHORE**: update dependencies
 
