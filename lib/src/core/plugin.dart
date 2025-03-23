@@ -14,20 +14,23 @@ export '../plugins/knobs/knobs.dart';
 export 'layout.dart';
 export '../plugins/theme_mode.dart';
 
-/// Use this method to initialize and customize built-in plugins.
-List<Plugin> initializePlugins({
-  bool enableThemeMode = true,
-  bool enableCompactLayoutDeviceFrame = true,
-  bool enableExpandedLayoutDeviceFrame = true,
-  bool enableTimeDilation = true,
-  bool enableDirectionality = true,
-  bool enableCodeView = false,
-  bool enableTextSizer = true,
-  bool enableInspector = true,
-  LocalizationData? localizationData,
-  DeviceFrameData initialDeviceFrameData = defaultDeviceFrameData,
-}) =>
-    [
+class StorybookPlugins {
+  final List<Plugin> enabledPlugins = [];
+
+  StorybookPlugins({
+    bool enableThemeMode = true,
+    bool enableCompactLayoutDeviceFrame = true,
+    bool enableExpandedLayoutDeviceFrame = true,
+    bool enableTimeDilation = false,
+    bool enableDirectionality = false,
+    bool enableCodeView = false,
+    bool enableTextSizer = true,
+    bool enableInspector = true,
+    LocalizationData? localizationData,
+    DeviceFrameData initialDeviceFrameData = defaultDeviceFrameData,
+    List<Plugin> customPlugins = const [],
+  }) {
+    enabledPlugins.addAll([
       if (enableThemeMode) ThemeModePlugin(),
       if (enableCompactLayoutDeviceFrame || enableExpandedLayoutDeviceFrame)
         DeviceFramePlugin(
@@ -41,7 +44,10 @@ List<Plugin> initializePlugins({
       CodeViewPlugin(enableCodeView: enableCodeView),
       LocalizationPlugin(initialData: localizationData ?? LocalizationData.initDefault()),
       InspectorPlugin(enableInspector: enableInspector),
-    ];
+      ...customPlugins,
+    ]);
+  }
+}
 
 typedef OnPluginButtonPressed = void Function(BuildContext context);
 typedef NullableWidgetBuilder = Widget? Function(BuildContext context);

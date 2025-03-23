@@ -9,14 +9,11 @@ import 'package:storybook_toolkit/src/plugins/others/inspector.dart';
 import 'package:storybook_toolkit/src/storybook/current_story.dart';
 import 'package:storybook_toolkit/storybook_toolkit.dart';
 
-
-final _defaultPlugins = initializePlugins();
-
 class Storybook extends StatefulWidget {
   Storybook({
     super.key,
     required Iterable<Story> stories,
-    Iterable<Plugin>? plugins,
+    StorybookPlugins? plugins,
     this.initialStory,
     this.wrapperBuilder = materialWrapper,
     this.routeWrapperBuilder,
@@ -27,17 +24,13 @@ class Storybook extends StatefulWidget {
     this.logoWidget,
     Layout initialLayout = Layout.auto,
     double autoLayoutThreshold = 800,
-  })  : plugins = UnmodifiableListView([
-          LayoutPlugin(
-            initialLayout,
-            autoLayoutThreshold,
-            enableLayout: enableLayout,
-          ),
-          ContentsPlugin(logoWidget: logoWidget, showPanel: showPanel),
-          ...plugins ?? _defaultPlugins,
-          KnobsPlugin(showPanel: showPanel),
-        ]),
-        stories = UnmodifiableListView(stories);
+  }) : plugins = UnmodifiableListView([
+         LayoutPlugin(initialLayout, autoLayoutThreshold, enableLayout: enableLayout),
+         ContentsPlugin(logoWidget: logoWidget, showPanel: showPanel),
+         ...(plugins ?? StorybookPlugins()).enabledPlugins,
+         KnobsPlugin(showPanel: showPanel),
+       ]),
+       stories = UnmodifiableListView(stories);
 
   /// All available stories.
   ///
@@ -90,23 +83,23 @@ class _StorybookState extends State<Storybook> {
   GoRouter? router;
 
   void _initExpansionTileStateMap() {
-    final foldersList = widget.stories
-        .where((story) => story.router != null)
-        .expand((story) => story.storyPathFolders)
-        .toSet()
-        .toList();
+    final foldersList =
+        widget.stories
+            .where((story) => story.router != null)
+            .expand((story) => story.storyPathFolders)
+            .toSet()
+            .toList();
 
-    final Map<String, bool> expansionTileStateMap = {
-      for (final folder in foldersList) folder: false,
-    };
+    final Map<String, bool> expansionTileStateMap = {for (final folder in foldersList) folder: false};
 
     _expansionTileState.setExpansionTileStateMap = expansionTileStateMap;
   }
 
   void _setExpansionTileState() {
-    final String routePathMatch = router!.routeInformationParser.configuration
-        .findMatch(router!.routerDelegate.currentConfiguration.uri)
-        .fullPath;
+    final String routePathMatch =
+        router!.routeInformationParser.configuration
+            .findMatch(router!.routerDelegate.currentConfiguration.uri)
+            .fullPath;
 
     _storyNotifier.hasRouteMatch = routePathMatch.isNotEmpty;
 
@@ -148,11 +141,7 @@ class _StorybookState extends State<Storybook> {
       }),
     );
 
-    _storyNotifier = StoryNotifier(
-      widget.stories,
-      storyRouteMap: routeMap,
-      initial: widget.initialStory,
-    );
+    _storyNotifier = StoryNotifier(widget.stories, storyRouteMap: routeMap, initial: widget.initialStory);
 
     _expansionTileState = ExpansionTileStateNotifier();
 
@@ -181,129 +170,115 @@ class _StorybookState extends State<Storybook> {
     );
 
     return MaterialApp(
-        theme: ThemeData(
-          canvasColor: widget.canvasColor,
-          splashFactory: NoSplash.splashFactory,
-          focusColor: Theme.of(context).focusColor.withAlpha(18),
-          expansionTileTheme: const ExpansionTileThemeData(
-            shape: RoundedRectangleBorder(),
-            collapsedShape: RoundedRectangleBorder(),
-          ),
-          listTileTheme: ListTileThemeData(
-            minLeadingWidth: 0,
-            minVerticalPadding: 4.0,
-            horizontalTitleGap: 5.0,
-            selectedColor: Theme.of(context).primaryColor,
-            selectedTileColor: Theme.of(context).focusColor.withAlpha(18),
-            visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
-            titleTextStyle: Theme.of(context).textTheme.bodyMedium,
-            subtitleTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  height: 1.2,
-                  color: Colors.black54,
-                ),
-          ),
+      theme: ThemeData(
+        canvasColor: widget.canvasColor,
+        splashFactory: NoSplash.splashFactory,
+        focusColor: Theme.of(context).focusColor.withAlpha(18),
+        expansionTileTheme: const ExpansionTileThemeData(
+          shape: RoundedRectangleBorder(),
+          collapsedShape: RoundedRectangleBorder(),
         ),
-        debugShowCheckedModeBanner: false,
-        home: PopScope(
-          canPop: false,
-          child: MediaQuery.fromView(
-            view: View.of(context),
-            child: Localizations(
-              delegates: const [
-                DefaultMaterialLocalizations.delegate,
-                DefaultCupertinoLocalizations.delegate,
-                DefaultWidgetsLocalizations.delegate,
+        listTileTheme: ListTileThemeData(
+          minLeadingWidth: 0,
+          minVerticalPadding: 4.0,
+          horizontalTitleGap: 5.0,
+          selectedColor: Theme.of(context).primaryColor,
+          selectedTileColor: Theme.of(context).focusColor.withAlpha(18),
+          visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+          titleTextStyle: Theme.of(context).textTheme.bodyMedium,
+          subtitleTextStyle: Theme.of(context).textTheme.bodySmall?.copyWith(height: 1.2, color: Colors.black54),
+        ),
+      ),
+      debugShowCheckedModeBanner: false,
+      home: PopScope(
+        canPop: false,
+        child: MediaQuery.fromView(
+          view: View.of(context),
+          child: Localizations(
+            delegates: const [
+              DefaultMaterialLocalizations.delegate,
+              DefaultCupertinoLocalizations.delegate,
+              DefaultWidgetsLocalizations.delegate,
+            ],
+            locale: const Locale('en', 'US'),
+            child: Nested(
+              children: [
+                Provider.value(value: widget.plugins),
+                ChangeNotifierProvider.value(value: _storyNotifier),
+                ChangeNotifierProvider.value(value: _expansionTileState),
+                ...widget.plugins
+                    .map((plugin) => plugin.wrapperBuilder)
+                    .whereType<TransitionBuilder>()
+                    .map((builder) => SingleChildBuilder(builder: builder)),
               ],
-              locale: const Locale('en', 'US'),
-              child: Nested(
-                children: [
-                  Provider.value(value: widget.plugins),
-                  ChangeNotifierProvider.value(value: _storyNotifier),
-                  ChangeNotifierProvider.value(value: _expansionTileState),
-                  ...widget.plugins
-                      .map((plugin) => plugin.wrapperBuilder)
-                      .whereType<TransitionBuilder>()
-                      .map((builder) => SingleChildBuilder(builder: builder)),
-                ],
-                child: Scaffold(
-                  body: Builder(
-                    builder: (BuildContext context) {
-                      final bool isSidePanel = context.watch<OverlayController?>() != null;
+              child: Scaffold(
+                body: Builder(
+                  builder: (BuildContext context) {
+                    final bool isSidePanel = context.watch<OverlayController?>() != null;
 
-                      final bool isPage = context.select(
-                        (StoryNotifier value) => value.currentStory?.isPage == true,
-                      );
-                      final bool isError = context.select(
-                        (StoryNotifier value) => value.hasRouteMatch == false,
-                      );
+                    final bool isPage = context.select((StoryNotifier value) => value.currentStory?.isPage == true);
+                    final bool isError = context.select((StoryNotifier value) => value.hasRouteMatch == false);
 
-                      final bool showBrandingWidget = widget.brandingWidget != null && !isPage && !isError;
+                    final bool showBrandingWidget = widget.brandingWidget != null && !isPage && !isError;
 
-                      return widget.showPanel
-                          ? Stack(
-                              alignment: Alignment.topCenter,
+                    return widget.showPanel
+                        ? Stack(
+                          alignment: Alignment.topCenter,
+                          children: [
+                            Column(
                               children: [
-                                Column(
-                                  children: [
-                                    Expanded(
-                                      child: Inspector(
-                                        isEnabled: context.watch<InspectorNotifier>().value,
-                                        child: currentStory,
-                                      ),
-                                    ),
-                                    RepaintBoundary(
-                                      child: Material(
-                                        child: SafeArea(
-                                          top: false,
-                                          left: isSidePanel,
-                                          right: isSidePanel,
-                                          child: CompositedTransformTarget(
-                                            link: _layerLink,
-                                            child: Directionality(
-                                              textDirection: TextDirection.ltr,
-                                              child: Container(
-                                                width: double.infinity,
-                                                decoration: const BoxDecoration(
-                                                  border: Border(
-                                                    top: BorderSide(
-                                                      color: Colors.black12,
-                                                    ),
+                                Expanded(
+                                  child: Inspector(
+                                    isEnabled: context.watch<InspectorNotifier>().value,
+                                    child: currentStory,
+                                  ),
+                                ),
+                                RepaintBoundary(
+                                  child: Material(
+                                    child: SafeArea(
+                                      top: false,
+                                      left: isSidePanel,
+                                      right: isSidePanel,
+                                      child: CompositedTransformTarget(
+                                        link: _layerLink,
+                                        child: Directionality(
+                                          textDirection: TextDirection.ltr,
+                                          child: Container(
+                                            width: double.infinity,
+                                            decoration: const BoxDecoration(
+                                              border: Border(top: BorderSide(color: Colors.black12)),
+                                            ),
+                                            child: Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                Align(
+                                                  alignment: Alignment.centerLeft,
+                                                  child: PluginPanel(
+                                                    plugins: widget.plugins,
+                                                    overlayKey: _overlayKey,
+                                                    layerLink: _layerLink,
                                                   ),
                                                 ),
-                                                child: Stack(
-                                                  alignment: Alignment.center,
-                                                  children: [
-                                                    Align(
-                                                      alignment: Alignment.centerLeft,
-                                                      child: PluginPanel(
-                                                        plugins: widget.plugins,
-                                                        overlayKey: _overlayKey,
-                                                        layerLink: _layerLink,
-                                                      ),
-                                                    ),
-                                                    if (showBrandingWidget) widget.brandingWidget!,
-                                                  ],
-                                                ),
-                                              ),
+                                                if (showBrandingWidget) widget.brandingWidget!,
+                                              ],
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
-                                Directionality(
-                                  textDirection: TextDirection.ltr,
-                                  child: Overlay(key: _overlayKey),
+                                  ),
                                 ),
                               ],
-                            )
-                          : currentStory;
-                    },
-                  ),
+                            ),
+                            Directionality(textDirection: TextDirection.ltr, child: Overlay(key: _overlayKey)),
+                          ],
+                        )
+                        : currentStory;
+                  },
                 ),
               ),
             ),
+          ),
         ),
       ),
     );

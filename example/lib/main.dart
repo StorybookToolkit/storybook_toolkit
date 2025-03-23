@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => Storybook(
         canvasColor: Colors.white,
         initialStory: 'Home',
-        plugins: initializePlugins(
+        plugins: StorybookPlugins(
           enableCodeView: false,
           initialDeviceFrameData: DeviceFrameData(
             visibility: DeviceFrameVisibility.none,

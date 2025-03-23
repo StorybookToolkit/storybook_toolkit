@@ -56,7 +56,7 @@ final storybook = Storybook(
     ),
   ],
   showPanel: true,
-  plugins: initializePlugins(
+  plugins: StorybookPlugins(
     enableCodeView: false,
     enableDirectionality: false,
     enableTimeDilation: false,
