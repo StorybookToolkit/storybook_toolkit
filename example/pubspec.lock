@@ -2,12 +2,11 @@
 # See https://dart.dev/tools/pub/glossary#lockfile
 packages:
   adaptive_golden_test:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: adaptive_golden_test
-      sha256: "6c2c80eda0f6e8d2f897376a0f708aa0409215fdaf468b74bdc039c62da7e038"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../../adaptive_golden_test"
+      relative: true
+    source: path
     version: "1.2.0"
   any_syntax_highlighter:
     dependency: transitive
@@ -29,10 +28,10 @@ packages:
     dependency: transitive
     description:
       name: async
-      sha256: d2872f9c19731c2e5f10444b14686eb7cc85c76274bd6c16e1816bff9a3bab63
+      sha256: "758e6d74e971c3e5aceb4110bfd6698efc7f501675bcfe0c775459a8140750eb"
       url: "https://pub.dev"
     source: hosted
-    version: "2.12.0"
+    version: "2.13.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -74,13 +73,12 @@ packages:
     source: hosted
     version: "3.0.6"
   device_frame_plus:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: device_frame_plus
-      sha256: "064e86f71f2721e66e4282c98d475cf9cd1e55d51eca6100183b7f6f2d237463"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.0"
+      path: "../../device_frame_plus"
+      relative: true
+    source: path
+    version: "1.4.0"
   fading_edge_scrollview:
     dependency: transitive
     description:
@@ -93,18 +91,18 @@ packages:
     dependency: transitive
     description:
       name: fake_async
-      sha256: "6a95e56b2449df2273fd8c45a662d6947ce1ebb7aafe80e550a3f68297f3cacc"
+      sha256: "5368f224a74523e8d2e7399ea1638b37aecfca824a3cc4dfdf77bf1fa905ac44"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.2"
+    version: "1.3.3"
   ffi:
     dependency: transitive
     description:
       name: ffi
-      sha256: "289279317b4b16eb2bb7e271abccd4bf84ec9bdcbe999e278a94b804f5630418"
+      sha256: "16ed7b077ef01ad6170a3d0c57caa4a112a38d7a2ed5602e0aca9ca6f3d98da6"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.3"
   file:
     dependency: transitive
     description:
@@ -133,14 +131,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  freezed_annotation:
-    dependency: transitive
-    description:
-      name: freezed_annotation
-      sha256: c87ff004c8aa6af2d531668b46a4ea379f7191dc6dfa066acd53d506da6e044b
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   go_router:
     dependency: transitive
     description:
@@ -185,26 +175,18 @@ packages:
     dependency: "direct main"
     description:
       name: intl
-      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.19.0"
-  json_annotation:
-    dependency: transitive
-    description:
-      name: json_annotation
-      sha256: "1ce844379ca14835a50d2f019a3099f419082cfdd231cd86a142af94dd5c6bb1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.9.0"
+    version: "0.20.2"
   leak_tracker:
     dependency: transitive
     description:
       name: leak_tracker
-      sha256: c35baad643ba394b40aac41080300150a4f08fd0fd6a10378f8f7c6bc161acec
+      sha256: "6bb818ecbdffe216e81182c2f0714a2e62b593f4a4f13098713ff1685dfb6ab0"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.8"
+    version: "10.0.9"
   leak_tracker_flutter_testing:
     dependency: transitive
     description:
@@ -481,12 +463,11 @@ packages:
     source: hosted
     version: "1.4.0"
   vader_popup:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: vader_popup
-      sha256: abeec1e7e48ad4ead12764ca412b9b8877cf0e9725a2039f1170718d645fb5a4
-      url: "https://pub.dev"
-    source: hosted
+      path: "../../vader_popup"
+      relative: true
+    source: path
     version: "0.2.0"
   vector_math:
     dependency: transitive
@@ -500,10 +481,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: "0968250880a6c5fe7edc067ed0a13d4bae1577fe2771dcf3010d52c4a9d3ca14"
+      sha256: ddfa8d30d89985b96407efce8acbdd124701f96741f2d981ca860662f1c0dc02
       url: "https://pub.dev"
     source: hosted
-    version: "14.3.1"
+    version: "15.0.0"
   web:
     dependency: transitive
     description:

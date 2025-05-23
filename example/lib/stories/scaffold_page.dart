@@ -70,7 +70,7 @@ class ScaffoldPage extends StatelessWidget {
         title: Text(
           titleKnob,
           style: TextStyle(
-            color: Colors.white.withOpacity(0.75),
+            color: Colors.white.withAlpha(192),
           ),
         ),
         elevation: elevationKnob,
