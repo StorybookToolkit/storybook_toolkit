@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:any_syntax_highlighter/any_syntax_highlighter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_syntax_highlighter/flutter_syntax_highlighter.dart';
 import 'package:provider/provider.dart';
 import 'package:storybook_toolkit/src/plugins/code_view/code_view_syntax_theme.dart';
 import 'package:storybook_toolkit/storybook_toolkit.dart';
@@ -56,14 +56,11 @@ class CurrentStoryCode extends StatelessWidget {
                       return ScrollConfiguration(
                         behavior: scrollBehaviour,
                         child: SingleChildScrollView(
-                          child: AnySyntaxHighlighter(
-                            snapshot.data ?? '',
+                          child: SyntaxHighlighter(
+                            code: snapshot.data ?? '',
                             fontSize: 12,
-                            padding: defaultPaddingValue,
-                            hasCopyButton: true,
-                            isSelectableText: isDesktopWeb,
-                            reservedWordSets: const {'dart'},
-                            theme: CustomSyntaxHighlighterTheme.customTheme(),
+                            lightColorSchema: MyLightSyntaxTheme(),
+                            darkColorSchema: MyDarkSyntaxTheme(),
                           ),
                         ),
                       );

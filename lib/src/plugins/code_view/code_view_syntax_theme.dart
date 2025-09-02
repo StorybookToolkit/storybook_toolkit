@@ -1,54 +1,46 @@
-import 'package:any_syntax_highlighter/themes/any_syntax_highlighter_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_syntax_highlighter/flutter_syntax_highlighter.dart';
 
-class CustomSyntaxHighlighterTheme {
-  static AnySyntaxHighlighterTheme customTheme() => const AnySyntaxHighlighterTheme(
-        classStyle: TextStyle(
-          color: Color(0xffffffff),
-        ),
-        staticStyle: TextStyle(
-          color: Color(0xfff582c3),
-        ),
-        constructor: TextStyle(
-          color: Color(0xffffc66d),
-        ),
-        multilineComment: TextStyle(
-          color: Color(0xffbbaeaa),
-        ),
-        comment: TextStyle(
-          color: Color(0xffbbaeaa),
-        ),
-        keyword: TextStyle(
-          color: Color(0xffcc7832),
-          fontWeight: FontWeight.bold,
-        ),
-        identifier: TextStyle(
-          color: Color(0xffffffff),
-        ),
-        private: TextStyle(
-          color: Color(0xffffffff),
-        ),
-        function: TextStyle(
-          color: Color(0xffc678dd),
-        ),
-        method: TextStyle(
-          color: Color(0xffc884fb),
-        ),
-        number: TextStyle(
-          color: Color(0xff8ba0e5),
-        ),
-        string: TextStyle(
-          color: Color(0xff8ba0e5),
-        ),
-        operator: TextStyle(
-          color: Color(0xffffffff),
-        ),
-        separator: TextStyle(
-          color: Color(0xffffffff),
-        ),
-        fontFeatures: [FontFeature.slashedZero()],
-        fontFamily: 'RobotoMono',
-        letterSpacing: 0.1,
-        decoration: BoxDecoration(color: Colors.transparent),
-      );
+class MyLightSyntaxTheme extends SyntaxColorSchema {
+  const MyLightSyntaxTheme()
+      : super(
+    baseStyle: const Color(0xFF2B2B2B),
+    lineNumberStyle: const Color(0xFFAAAAAA),
+    keywordStyle: const Color(0xFF8959A8),
+    specialKeywordStyle: const Color(0xFFAA5DCD),
+    storageModifierStyle: const Color(0xFFAA5DCD),
+    typeStyle: const Color(0xFF3E999F),
+    functionStyle: const Color(0xFF4271AE),
+    literalStyle: const Color(0xFF795E26),
+    commentStyle: const Color(0xFF8E908C),
+    punctuationStyle: const Color(0xFF2B2B2B),
+    stringStyle: const Color(0xFF718C00),
+    numberStyle: const Color(0xFF0992D6),
+    bracket1Style: const Color(0xFF3E9F5E),
+    bracket2Style: const Color(0xFFD67F00),
+    bracket3Style: const Color(0xFFD64F4F),
+    variableStyle: const Color(0xFF4271AE),
+  );
+}
+
+class MyDarkSyntaxTheme extends SyntaxColorSchema {
+  const MyDarkSyntaxTheme()
+      : super(
+    baseStyle: const Color(0xFFE0E0E0),
+    lineNumberStyle: const Color(0xFF7F8C8D),
+    keywordStyle: const Color(0xFF81A2BE),
+    specialKeywordStyle: const Color(0xFFB294BB),
+    storageModifierStyle: const Color(0xFFB294BB),
+    typeStyle: const Color(0xFFF0C674),
+    functionStyle: const Color(0xFF8ABEB7),
+    literalStyle: const Color(0xFFDE935F),
+    commentStyle: const Color(0xFF969896),
+    punctuationStyle: const Color(0xFFE0E0E0),
+    stringStyle: const Color(0xFFB5BD68),
+    numberStyle: const Color(0xFFDE935F),
+    bracket1Style: const Color(0xFFA0E8A5),
+    bracket2Style: const Color(0xFFD5A0E8),
+    bracket3Style: const Color(0xFFE8A0A0),
+    variableStyle: const Color(0xFF8ABEB7),
+  );
 }
