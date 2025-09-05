@@ -18,8 +18,8 @@ dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  go_router: ^14.2.7
-  inspector: ^2.1.0
+  go_router: ">=14.2.7 <17.0.0"
+  inspector: ">=2.1.0 <3.0.0"
   pointer_interceptor: ^0.10.1+2
   flutter_syntax_highlighter: ^0.2.1
   provider: ^6.1.2
@@ -30,7 +30,7 @@ dependencies:
 
 dev_dependencies:
   mocktail: ^1.0.4
-  flutter_lints: ^5.0.0
+  flutter_lints: ">=5.0.0 <7.0.0"
 
 flutter:
   uses-material-design: true
