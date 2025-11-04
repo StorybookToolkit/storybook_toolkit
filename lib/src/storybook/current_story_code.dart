@@ -1,36 +1,52 @@
-import 'dart:ui';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_syntax_highlighter/flutter_syntax_highlighter.dart';
 import 'package:provider/provider.dart';
-import 'package:storybook_toolkit/src/plugins/code_view/code_view_syntax_theme.dart';
 import 'package:storybook_toolkit/storybook_toolkit.dart';
+import 'package:syntax_highlight/syntax_highlight.dart';
 
-class CurrentStoryCode extends StatelessWidget {
-  const CurrentStoryCode({this.panelBackgroundColor});
+class CurrentStoryCode extends StatefulWidget {
+  const CurrentStoryCode();
 
-  final Color? panelBackgroundColor;
+  @override
+  State<CurrentStoryCode> createState() => _CurrentStoryCodeState();
+}
+
+class _CurrentStoryCodeState extends State<CurrentStoryCode> {
+  bool _isInitialized = false;
+  late final CodeEditorController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _initializeHighlighter().then((_) {
+      if (mounted) {
+        setState(() {
+          _isInitialized = true;
+        });
+      }
+    });
+  }
+
+  Future<void> _initializeHighlighter() async {
+    await Highlighter.initialize(['dart']);
+
+    final lightTheme = await HighlighterTheme.loadLightTheme();
+    final darkTheme = await HighlighterTheme.loadDarkTheme();
+
+    _controller = CodeEditorController(
+      lightHighlighter: Highlighter(language: 'dart', theme: lightTheme),
+      darkHighlighter: Highlighter(language: 'dart', theme: darkTheme),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final ScrollBehavior scrollBehaviour = ScrollConfiguration.of(context).copyWith(
-      scrollbars: false,
-      dragDevices: {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-      },
-    );
-
-    final bool isDesktopWeb = kIsWeb &&
-        !(kIsWeb && (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.android));
-
     final TextStyle? textStyle = Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white70);
 
     return Directionality(
       textDirection: TextDirection.ltr,
       child: ColoredBox(
-        color: panelBackgroundColor ?? ThemeData.dark().scaffoldBackgroundColor,
+        color: Theme.of(context).scaffoldBackgroundColor,
         child: SafeArea(
           bottom: false,
           left: false,
@@ -39,9 +55,9 @@ class CurrentStoryCode extends StatelessWidget {
             initialEntries: [
               OverlayEntry(
                 builder: (context) => FutureBuilder<String?>(
-                  future: context.watch<StoryNotifier>().currentStory?.codeString,
+                  future: context.read<StoryNotifier>().currentStory?.codeString,
                   builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
+                    if (snapshot.connectionState == ConnectionState.waiting || !_isInitialized) {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
@@ -53,15 +69,15 @@ class CurrentStoryCode extends StatelessWidget {
                         ),
                       );
                     } else if (snapshot.hasData) {
-                      return ScrollConfiguration(
-                        behavior: scrollBehaviour,
-                        child: SingleChildScrollView(
-                          child: SyntaxHighlighter(
-                            code: snapshot.data ?? '',
-                            fontSize: 12,
-                            lightColorSchema: MyLightSyntaxTheme(),
-                            darkColorSchema: MyDarkSyntaxTheme(),
-                          ),
+                      final code = snapshot.data ?? '';
+                      _controller.value = TextEditingValue(text: code);
+
+                      return Padding(
+                        padding: const EdgeInsets.all(defaultPaddingValue),
+                        child: CodeEditor(
+                          textStyle: TextStyle(fontFamily: 'monospace', fontSize: 12, height: 1.3),
+                          controller: _controller,
+                          readOnly: true,
                         ),
                       );
                     }
