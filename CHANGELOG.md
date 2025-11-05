@@ -1,4 +1,7 @@
 # History
+## 2.0.0-dev.4
+- **FEAT**: Change `syntax_highlight` dependency (Thanks to [@marcelomendoncasoares](https://github.com/marcelomendoncasoares) for PR [#7](https://github.com/StorybookToolkit/storybook_toolkit/pull/7))
+
 ## 2.0.0-dev.3
 - **CHORE**: upgrade dependencies
   
