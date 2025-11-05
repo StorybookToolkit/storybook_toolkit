@@ -76,7 +76,7 @@ Storybook support golden tests:
 
   ```yaml
   dev_dependencies:
-    storybook_toolkit_tester: ^1.2.0 
+    storybook_toolkit_tester: ^2.0.0-dev.3 
   ```
 
 2. Create test file, e.g. `storybook_test.dart`.
