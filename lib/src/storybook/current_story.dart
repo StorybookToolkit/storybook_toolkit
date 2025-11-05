@@ -5,7 +5,6 @@ import 'package:storybook_toolkit/src/plugins/code_view/code_view.dart';
 import 'package:storybook_toolkit/src/storybook/current_story_code.dart';
 import 'package:storybook_toolkit/storybook_toolkit.dart';
 
-
 class CurrentStory extends StatelessWidget {
   const CurrentStory({
     super.key,
@@ -57,6 +56,15 @@ class CurrentStory extends StatelessWidget {
       final RouteWrapperBuilder effectiveRouteWrapperBuilder =
           currentStory.routeWrapperBuilder ?? routeWrapperBuilder ?? RouteWrapperBuilder();
 
+      late final ThemeData theme;
+      try {
+        theme = context.watch<ThemeModeNotifier>().value != ThemeMode.light
+            ? effectiveRouteWrapperBuilder.darkTheme
+            : effectiveRouteWrapperBuilder.theme;
+      } catch (e) {
+        theme = effectiveRouteWrapperBuilder.darkTheme;
+      }
+
       child = MaterialApp.router(
         title: effectiveRouteWrapperBuilder.title,
         theme: effectiveRouteWrapperBuilder.theme,
@@ -71,13 +79,14 @@ class CurrentStory extends StatelessWidget {
               node: Storybook.storyFocusNode,
               child: showCodeSnippet && !currentStory.isPage
                   ? Stack(
-                children: [
-                  child ?? const SizedBox.shrink(),
-                  CurrentStoryCode(
-                    panelBackgroundColor: effectiveRouteWrapperBuilder.darkTheme.scaffoldBackgroundColor,
-                  ),
-                ],
-              )
+                      children: [
+                        child ?? const SizedBox.shrink(),
+                        Theme(
+                          data: theme,
+                          child: CurrentStoryCode(),
+                        ),
+                      ],
+                    )
                   : child ?? const SizedBox.shrink(),
             ),
           ),
@@ -92,12 +101,12 @@ class CurrentStory extends StatelessWidget {
         showCodeSnippet && !currentStory.isPage
             ? const CurrentStoryCode()
             : FocusScope(
-          node: Storybook.storyFocusNode,
-          child: Directionality(
-            textDirection: getEffectiveTextDirection(),
-            child: Builder(builder: currentStory.builder!),
-          ),
-        ),
+                node: Storybook.storyFocusNode,
+                child: Directionality(
+                  textDirection: getEffectiveTextDirection(),
+                  child: Builder(builder: currentStory.builder!),
+                ),
+              ),
       );
     }
 

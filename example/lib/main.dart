@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         canvasColor: Colors.white,
         initialStory: 'Home',
         plugins: StorybookPlugins(
-          enableCodeView: false,
+          enableCodeView: true,
           initialDeviceFrameData: DeviceFrameData(
             visibility: DeviceFrameVisibility.none,
             device: Devices.ios.iPhone12ProMax,
