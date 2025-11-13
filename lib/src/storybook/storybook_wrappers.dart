@@ -51,9 +51,11 @@ Widget materialWrapper(BuildContext context, Widget? child) {
   final LocalizationData localization = context.watch<LocalizationNotifier>().value;
   return MaterialApp(
     theme: ThemeData.light().copyWith(
+      canvasColor: Colors.white,
       scaffoldBackgroundColor: Colors.white,
     ),
     darkTheme: ThemeData.dark().copyWith(
+      canvasColor: Colors.black,
       scaffoldBackgroundColor: Colors.black,
     ),
     debugShowCheckedModeBanner: false,
